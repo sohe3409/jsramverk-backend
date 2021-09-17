@@ -17,6 +17,6 @@ npm start
 
 ## Routes
 
-/list - List all documents
-/create - Create new document
+/list - List all documents <br />
+/create - Create new document <br />
 /update - Update document
