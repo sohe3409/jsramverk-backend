@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/sohe3409/jsramverk-backend.svg?branch=master)
+![Build Status](https://app.travis-ci.com/sohe3409/jsramverk-backend.svg?branch=master)
 
 # Editor Backend
 
