@@ -9,6 +9,7 @@ const { assert } = require('chai');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app.js');
+
 chai.should();
 
 const database = require("../db/database.js");
@@ -20,14 +21,10 @@ describe('app', () => {
   before(() => {
         (async (resolve) => {
             const db = await database.getDb();
-
-            db.db.listCollections(
-                { name: collectionName }
-            )
                 .next()
                 .then(async function(info) {
                     if (info) {
-                        await db.collection.drop();
+                        await db.docs.drop();
                     }
                 })
                 .catch(function(err) {
