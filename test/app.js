@@ -1,7 +1,3 @@
-
-
-/* global it describe */
-
 process.env.NODE_ENV = 'test';
 
 //Require the dev-dependencies
@@ -19,12 +15,17 @@ chai.use(chaiHttp);
 
 describe('app', () => {
   before(() => {
-        (async (resolve) => {
+        return new Promise(async (resolve) => {
             const db = await database.getDb();
+            // console.log("HÄÄÄR", db.collection)
+
+            db.db.listCollections(
+                { name: collectionName }
+            )
                 .next()
                 .then(async function(info) {
                     if (info) {
-                        await db.docs.drop();
+                        await db.collection.drop();
                     }
                 })
                 .catch(function(err) {
