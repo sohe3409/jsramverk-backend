@@ -21,10 +21,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit --timeout 100000",
-    "posttest": "npm run eslint",
-    "eslint": "eslit .",
-    "production": "NODE_ENV='production' node app.js"
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit --timeout 100000"
+
   },
   "author": "",
   "license": "ISC"
