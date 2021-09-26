@@ -3,5 +3,11 @@ node_js:
     - "node"
     - "14"
     - "12"
-    - "11"
+
 services: mongodb
+
+before_script:
+    - npm install
+
+script:
+    - npm test

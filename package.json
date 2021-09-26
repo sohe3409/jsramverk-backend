@@ -21,8 +21,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit --timeout 100000"
-
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit --timeout 10000",
+    "production": "NODE_ENV='production' node app.js"
   },
   "author": "",
   "license": "ISC"
