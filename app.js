@@ -40,6 +40,8 @@ const io = require("socket.io")(httpServer, {
 });
 
 let previous;
+let throttleTimer;
+
 
 io.sockets.on('connection', function(socket) {
     console.log(socket.id); // Nått lång och slumpat
@@ -52,6 +54,13 @@ io.sockets.on('connection', function(socket) {
 
      socket.on("doc", function (data) {
           socket.to(data["_id"]).emit("doc", data);
+
+          clearTimeout(throttleTimer);
+          console.log("writing");
+          throttleTimer = setTimeout(function() {
+              console.log("now it should save to database")
+          }, 2000);
+          clearTimeout(throttleTimer);
      });
 });
 
