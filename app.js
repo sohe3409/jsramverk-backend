@@ -35,7 +35,7 @@ app.use("/update", update);
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer, {
     cors: {
-      origin: "https://www.student.bth.se",
+      origin: "http://localhost:3000",
       methods: ["GET", "POST"]
     }
 });
