@@ -7,6 +7,7 @@ const index = require("./routes/index");
 const list = require("./routes/list");
 const create = require("./routes/create");
 const update = require("./routes/update");
+const auth = require("./routes/auth");
 
 const port = process.env.PORT || 1338;
 
@@ -25,7 +26,7 @@ if (process.env.NODE_ENV !== "test") {
     app.use(morgan("combined"));
 }
 
-app.use("/", index);
+app.use("/", auth);
 app.use("/list", list);
 app.use("/create", create);
 app.use("/update", update);
@@ -34,13 +35,13 @@ app.use("/update", update);
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer, {
     cors: {
-      origin: `https://www.student.bth.se`,
+      origin: "http://localhost:3000",
       methods: ["GET", "POST"]
     }
 });
 
 let previous;
-let throttleTimer;
+// let throttleTimer;
 
 
 io.sockets.on('connection', function(socket) {
@@ -54,13 +55,13 @@ io.sockets.on('connection', function(socket) {
 
      socket.on("doc", function (data) {
           socket.to(data["_id"]).emit("doc", data);
-
-          clearTimeout(throttleTimer);
-          console.log("writing");
-          throttleTimer = setTimeout(function() {
-              console.log("now it should save to database")
-          }, 2000);
-          clearTimeout(throttleTimer);
+          //
+          // clearTimeout(throttleTimer);
+          // console.log("writing");
+          // throttleTimer = setTimeout(function() {
+          //     console.log("now it should save to database")
+          // }, 2000);
+          // clearTimeout(throttleTimer);
      });
 });
 

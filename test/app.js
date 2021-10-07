@@ -39,19 +39,6 @@ describe('app', () => {
     });
 
 
-    describe('GET /', () => {
-        it('should get 200', (done) => {
-            chai.request(server)
-                .get("/")
-                .end((err, res) => {
-                    res.should.have.status(200);
-
-                    done();
-                });
-        });
-    });
-
-
     describe('POST /create', () => {
       it('should get 201', (done) => {
            let doc = {

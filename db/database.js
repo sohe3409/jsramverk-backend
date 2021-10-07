@@ -1,10 +1,10 @@
 const mongo = require("mongodb").MongoClient;
 const config = require("./config.json");
-const collectionName = "docs";
+const collectionName = "users";
 
 const database = {
     getDb: async function getDb () {
-        let dsn = `mongodb+srv://texteditor:texteditor@cluster0.lwrti.mongodb.net/editor?retryWrites=true&w=majority`;
+        let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.lwrti.mongodb.net/editor?retryWrites=true&w=majority`;
 
         if (process.env.NODE_ENV === 'test') {
             dsn = "mongodb://localhost:27017/test";
