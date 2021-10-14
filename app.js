@@ -10,10 +10,29 @@ const update = require("./routes/update");
 const auth = require("./routes/auth");
 
 const port = process.env.PORT || 1338;
+app.use(cors());
+
+//graphq schema
+const visual = false;
+const { graphqlHTTP } = require('express-graphql');
+const {
+    GraphQLSchema
+} = require("graphql");
+
+const RootQueryType = require("./graphql/root.js");
+
+const schema = new GraphQLSchema({
+    query: RootQueryType
+});
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: visual,
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+
 
 
 app.use((req, res, next) => {
@@ -35,7 +54,7 @@ app.use("/update", update);
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "https://www.student.bth.se",
       methods: ["GET", "POST"]
     }
 });

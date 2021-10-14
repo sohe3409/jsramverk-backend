@@ -5,8 +5,7 @@ const auth = require("../src/auth.js");
 
 
 router.put("/:id",
-    async function (req, res) {
-      console.log("hallå")
+  async function (req, res) {
         await server.updateDoc(req.params.id, req.body)
     }
 );
