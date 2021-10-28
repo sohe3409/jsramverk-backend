@@ -1,7 +1,8 @@
 const {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLList
+    GraphQLList,
+    GraphQLNonNull
 } = require('graphql');
 
 const UserType = require("./users.js");
@@ -30,9 +31,28 @@ const RootQueryType = new GraphQLObjectType({
             resolve: async function() {
                 return await users.getDocs();
             }
+        },
+        docs: {
+            type: GraphQLList(DType),
+            description: 'List of all documents',
+            resolve: async function() {
+                return await users.getAll();
+            }
         }
     })
 });
+
+const DType = new GraphQLObjectType({
+    name: 'D',
+    description: 'This represents a document',
+    fields: {
+        _id: { type: GraphQLNonNull(GraphQLString) },
+        name: { type: GraphQLNonNull(GraphQLString) },
+        content: { type: GraphQLString },
+        allowed_users: { type: GraphQLNonNull(GraphQLList(GraphQLString)) },
+    }
+});
+
 
 
 module.exports = RootQueryType;

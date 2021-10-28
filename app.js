@@ -3,11 +3,11 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
-const index = require("./routes/index");
 const list = require("./routes/list");
 const create = require("./routes/create");
 const update = require("./routes/update");
 const auth = require("./routes/auth");
+const contact = require("./routes/contact");
 
 const port = process.env.PORT || 1338;
 app.use(cors());
@@ -46,6 +46,7 @@ if (process.env.NODE_ENV !== "test") {
 }
 
 app.use("/", auth);
+app.use("/contact", contact);
 app.use("/list", list);
 app.use("/create", create);
 app.use("/update", update);
@@ -60,11 +61,9 @@ const io = require("socket.io")(httpServer, {
 });
 
 let previous;
-// let throttleTimer;
-
 
 io.sockets.on('connection', function(socket) {
-    console.log(socket.id); // Nått lång och slumpat
+    console.log("SOCKET ID",socket.id); // Nått lång och slumpat
 
     socket.on('create', function(room) {
          socket.leave(previous);
@@ -73,19 +72,9 @@ io.sockets.on('connection', function(socket) {
      });
 
      socket.on("doc", function (data) {
-          socket.to(data["_id"]).emit("doc", data);
-          //
-          // clearTimeout(throttleTimer);
-          // console.log("writing");
-          // throttleTimer = setTimeout(function() {
-          //     console.log("now it should save to database")
-          // }, 2000);
-          // clearTimeout(throttleTimer);
+          socket.to(data["name"]).emit("doc", data);
      });
 });
-
-
-
 
 app.use((req, res, next) => {
     var err = new Error("Not Found");

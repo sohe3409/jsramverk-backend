@@ -10,12 +10,4 @@ router.put("/:id",
     }
 );
 
-// router.put("/:id",
-//     (req, res, next) => auth.checkToken(req, res, next),
-//     async function (req, res) {
-//       console.log("hallå")
-//         await server.updateDoc(req.params.id, req.body)
-//     }
-// );
-
 module.exports = router;

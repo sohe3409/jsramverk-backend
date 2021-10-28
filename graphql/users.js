@@ -5,7 +5,6 @@ const {
     GraphQLNonNull
 } = require('graphql');
 
-
 const UserType = new GraphQLObjectType({
     name: 'User',
     description: 'This represents a user',
@@ -18,13 +17,13 @@ const UserType = new GraphQLObjectType({
 });
 
 const DocType = new GraphQLObjectType({
-  name: 'ProductionCompanies',
-  description: 'This represents a document',
-  fields: {
-      name: { type: GraphQLNonNull(GraphQLString) },
-      content: { type: GraphQLString },
-      allowed_users: { type: GraphQLNonNull(GraphQLList(GraphQLString)) },
-  }
+    name: 'Doc',
+    description: 'This represents a document',
+    fields: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        content: { type: GraphQLString },
+        allowed_users: { type: GraphQLNonNull(GraphQLList(GraphQLString)) },
+    }
 });
 
 
